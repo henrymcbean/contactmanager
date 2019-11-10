@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { smart } from '@babel/template';
-
 
 const Header = props => {
     const {branding} = props;
