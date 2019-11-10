@@ -3,10 +3,8 @@ import Contact from './Contact'
 
 
 class Contacts extends Component {
-  constructor() {
-    super();
-    this.state = {
-      contacts: [
+    state = {
+        contacts: [
         {
           id: 1,
           name: "John Doe",
@@ -25,9 +23,8 @@ class Contacts extends Component {
           email: "henry@gmail.com",
           phone: "111-111-1111"
         }
-      ]
+    ]
     };
-  }
 
   render() {
     const { contacts } = this.state;
@@ -37,9 +34,7 @@ class Contacts extends Component {
         {contacts.map(contact => (
           <Contact 
             key={contact.id} 
-            name={contact.name} 
-            email={contact.email} 
-            phone={contact.phone} />
+            contact={contact} />
         ))}
       </div>
     );
