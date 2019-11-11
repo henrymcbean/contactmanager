@@ -7,7 +7,8 @@ class AddContact extends Component {
   state = {
     name: "",
     email: "",
-    phone: ""
+    phone: "",
+    errors: {}
   };
 
   onChange = e => this.setState({ [e.target.name]: e.target.value });
@@ -16,6 +17,28 @@ class AddContact extends Component {
     e.preventDefault();
 
     const { name, email, phone } = this.state;
+
+    // Check for Errors
+    if (name === '') {
+      this.setState({errors: {
+        name: 'Name is required'
+      }});
+      return;
+    }
+
+    if (email === '') {
+      this.setState({errors: {
+        email: 'Email is required'
+      }});
+      return;
+    }
+
+    if (phone === '') {
+      this.setState({errors: {
+        phone: 'Phone number is required'
+      }});
+      return;
+    }
 
     const newContact = {
       id: uuid(),
@@ -31,12 +54,13 @@ class AddContact extends Component {
       id: '',
       name: '',
       email: '',
-      phone: ''
+      phone: '',
+      errors: {}
     });
   };
 
   render() {
-    const { name, email, phone } = this.state;
+    const { name, email, phone, errors } = this.state;
 
     return (
       <Consumer>
@@ -52,20 +76,23 @@ class AddContact extends Component {
                     name="name"
                     placeholder="Enter Name..."
                     value={name}
-                    onChange={this.onChange} />
+                    onChange={this.onChange}
+                    error={errors.name} />
                   <TextInputGroup 
                     label="Email"
                     type="email"
                     name="email"
                     placeholder="Enter Email..."
                     value={email}
-                    onChange={this.onChange} />
+                    onChange={this.onChange}
+                    error={errors.email}  />
                   <TextInputGroup 
                     label="Phone"
                     name="phone"
                     placeholder="Enter Phone..."
-                    value={email}
-                    onChange={this.onChange} />
+                    value={phone}
+                    onChange={this.onChange}
+                    error={errors.phone}  />
                   <input
                     type="submit"
                     value="Add Contact"
